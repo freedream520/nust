@@ -5,7 +5,7 @@ from django.views import generic
 
 from polls.models import Choice, Poll
 
-def IndexView(generic.ListView):
+class IndexView(generic.ListView):
 	template_name = 'polls/index.html'
 	context_object_name = 'latest_poll_list'
 
@@ -14,11 +14,11 @@ def IndexView(generic.ListView):
 		return Poll.objects.order_by('-pub_date')[:5]
 
 
-def DetailView(generic.DetailView):
+class DetailView(generic.DetailView):
 	model = Poll
 	template_name = 'polls/detail.html'
 
-def ResultsView(generic.DetailView):
+class ResultsView(generic.DetailView):
 	model = Poll
 	template_name = 'polls/results.html'
 
