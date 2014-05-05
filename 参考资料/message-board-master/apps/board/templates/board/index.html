@@ -1,0 +1,62 @@
+{% extends "board/base.html" %}
+
+{% block content %}
+	{% if forums %}
+	<div>
+		<h1>{{ current_forum.forum_name }}</h1>
+	</div>
+	<div>
+		<h3>Forums</h3>
+		{% for forum in forums %}
+			<div>
+				<a href="{{ forum.forum_id }}">{{ forum.forum_name }}</a>
+			</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+
+	{% if is_staff %}
+		<div>
+			<h3>Add a forum</h3>
+			<form action="" method="post">
+				{% csrf_token %}
+				<input type="text" name="forum-name">
+				<input type="submit" value="Submit">
+			</form>
+			{{ msg }}
+		</div>
+	{% endif %}
+
+	{% if topics %}
+		<div>
+			<h3>Topics</h3>
+			<ul>
+			{% for topic in topics %}
+				<li>
+					<a href="/board/{{ current_forum.forum_id }}/topic/{{ topic.topic_id }}">{{ topic.topic_name }}</a>
+					<ul>
+						<li>{{ topic.topic_creator }}</li>
+						<li>{{ topic.topic_created_date }}</li>
+						<li>{{ topic.topic_forum }}</li>
+					</ul>
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+
+	{% if is_logged_in %}
+		<div>
+			<h3>Add a topic</h3>
+			<form action="" method="post">
+				{% csrf_token %}
+				<input type="text" name="topic-name">
+				<br>
+				<textarea name="post-content"></textarea>
+				<br>
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+	{% endif %}
+
+{% endblock content %}

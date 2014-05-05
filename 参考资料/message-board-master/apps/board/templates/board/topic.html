@@ -1,0 +1,71 @@
+{% extends "board/base.html" %}
+
+{% block content %}
+	<div>
+		<span id="topic-title">
+			<h3>
+				{{ current_topic.topic_name }}
+				{% if is_staff %}
+					<button id="pin-button" type="button" value="{{ current_topic.topic_id }}">{% if current_topic.topic_pinned %}Unpin{% else %}Pin{% endif %}</button>
+				{% endif %}
+			</h3>
+			{% if current_topic.topic_pinned %}
+			<span id="topic-subtitle">Pinned on {{ current_topic.topic_pinned_date }}</span>
+			{% endif %}
+		</span>
+
+		{% include 'board/topic_pagination.html' %}
+		
+		<div id="posts">
+			{% for post in posts %}
+				<div id="{{ post.post_id }}" class="post">
+					<div class="post-head">
+						<span>
+						</span>
+						<span class="post-user-info">
+							<a href="/users/{{ post.post_creator.username }}" class="{% if post.post_creator.is_staff %}staff{% else %}user{% endif %}">
+								{{ post.post_creator }}
+							</a>
+							<br>
+							<span class="post-user-dates">
+								Joined: {{ post.post_creator.date_joined }}
+								<br>
+								Last Online: {{ post.post_creator.last_login }}
+							</span>
+						</span>
+					</div>
+					<div class="post-content">
+						<div class="post-text">{{ post.post_content }}</div>
+						<br>
+						<div class="post-footer">
+							<span>{{ post.post_created_date }}</span>
+							{% if post.post_edited_date %}
+								<span>Last edited: {{ post.post_edited_date }}</span>
+							{% endif %}
+							{% if is_logged_in and current_user and post.post_creator.username == current_user.username %}
+								<br>
+								<a class="post-edit" href="#edit">edit post</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+		{% include 'board/topic_pagination.html' %}
+
+		<div class="pagination-pad"></div>
+	</div>
+	{% if is_logged_in %}
+		<div class="form-wrapper">
+			<h3>Add a post</h3>
+			<form action="" method="post">
+				{% csrf_token %}
+				<input placeholder="Type something" id="post-submit-topic" type="hidden" value="{{ current_topic.topic_id }}">
+				<textarea name="post-content"></textarea>
+				<br>
+				<input id="post-submit" type="submit" value="Submit">
+			</form>
+		</div>
+	{% endif %}
+{% endblock content %}

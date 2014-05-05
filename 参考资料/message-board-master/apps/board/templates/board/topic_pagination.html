@@ -1,0 +1,39 @@
+<span class="pagination">
+	{% if current_page == 1 %}
+		<span class="pagination-page disabled pagination-first">&laquo;</span>
+	{% else %}
+		<a href="/board/topic/{{ current_topic.topic_id }}/1">
+			<span class="pagination-page pagination-first">&laquo;</span>
+		</a>
+	{% endif %}
+	{% for page in pages %}
+		{% if max_page > 10 %}
+			{% if page < 3 or page > max_page|add:'-4' %}
+				{% if page|add:"1" == current_page %}
+					<span class="pagination-page disabled">{{ page|add:"1" }}</span>
+				{% else %}
+					<a href="/board/topic/{{ current_topic.topic_id }}/{{ page|add:"1" }}">
+						<span class="pagination-page">{{ page|add:"1" }}</span>
+					</a>
+				{% endif %}
+			{% elif page == 3 %}
+				<span class="pagination-page">...</span>
+			{% endif %}
+		{% elif max_page <= 10 %}
+			{% if page|add:"1" == current_page %}
+				<span class="pagination-page disabled">{{ page|add:"1" }}</span>
+			{% else %}
+				<a href="/board/topic/{{ current_topic.topic_id }}/{{ page|add:"1" }}">
+					<span class="pagination-page">{{ page|add:"1" }}</span>
+				</a>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+	{% if current_page == max_page %}
+		<span class="pagination-page disabled pagination-last">&raquo;</span>
+	{% else %}
+		<a href="/board/topic/{{ current_topic.topic_id }}/{{ max_page }}">
+			<span class="pagination-page pagination-last">&raquo;</span>
+		</a>
+	{% endif %}
+</span>
