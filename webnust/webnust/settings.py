@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 	'polls',
 	'account',
+    'chat',
 )
 
 MIDDLEWARE_CLASSES = (
