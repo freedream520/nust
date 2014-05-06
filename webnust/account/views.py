@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
-from forms import MyRegistrationForm
+from account.forms import MyRegistrationForm
 
 # Create your views here.
 
