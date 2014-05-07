@@ -1,10 +1,12 @@
 from django.shortcuts import render_to_response, render
-from chat.models import Article #, Comment
+from chat.models import Article , Comment
 from django.http import HttpResponse
-from chat.forms import ArticleForm #, CommentForm
+from chat.forms import ArticleForm , CommentForm
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
-
+from django.contrib import messages
+from django.utils import timezone
+from django.conf import settings
 
 
 # Create your views here.
@@ -78,4 +80,41 @@ def search_titles(request):
 	articles = Article.objects.filter(title__contains=search_text)
 
 	return render_to_response('ajax_search.html', {'articles': articles})
+
+def add_comment(request, article_id):
+	a = Article.objects.get(id=article_id)
+
+	if request.method == "POST":
+		f = CommentForm(request.POST)
+		if f.is_valid():
+			c = f.save(commit=False)
+			c.pub_date = timezone.now()
+			c.article = a
+			c.save()
+
+			messages.success(request, "You Comment was added")
+
+			return HttpResponseRedirect('/t/%s' % article_id)
+
+	else:
+		f = CommentForm()
+
+	args = {}
+	args.update(csrf(request))
+
+	args['article'] = a
+	args['form'] = f
+
+	return render_to_response('add_comment.html', args)
+
+def delete_comment(request, comment_id):
+	c = Comment.objects.get(id=comment_id)
+
+	article_id = c.article.id
+
+	c.delete()
+
+	messages.add_message(request, settings.DELETE_MESSAGE, "Your comment was deleted")
+
+	return HttpResponseRedirect("/t/%s" % article_id)
 

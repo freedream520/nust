@@ -7,6 +7,11 @@
 <p>{{article.likes}} people liked this article</a></p>
 <p><a href="/t/like/{{article.id}}">Like</a></p>
 
+{% for c in article.comment_set.all reversed %}
+<p>{{c.pub_date|date:"Md G:i"}} {{c.username}}: {{c.body}} 
+<a href="/t/delete_comment/{{c.id}}">Delete</a>
+</p>
+{% endfor %}
 
 <p><a href="/t/add_comment/{{article.id}}">Add Comment</a></p>
 

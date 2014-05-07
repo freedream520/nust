@@ -17,3 +17,9 @@ class Article(models.Model):
     
 	def __unicode__(self):
 		return self.title
+
+class Comment(models.Model):
+    username = models.CharField(max_length=200)
+    body = models.TextField()
+    pub_date = models.DateTimeField('date published')
+    article = models.ForeignKey(Article)
