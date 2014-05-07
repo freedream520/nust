@@ -9,8 +9,8 @@ from django.core.context_processors import csrf
 
 # Create your views here.
 def articles(request):
-	language = 'en-gb'
-	session_language = 'en-gb'
+	language = 'zh-CN'
+	session_language = 'zh-CN'
 
 	if 'lang' in request.COOKIES:
 		language = request.COOKIES['lang']
@@ -68,3 +68,14 @@ def like_article(request, article_id):
 		a.likes = count
 		a.save()
 		return HttpResponseRedirect('/t/%s' % article_id)
+
+def search_titles(request):
+	if request.method == "POST":
+		search_text = request.POST['search_text']
+	else:
+		search_text = ''
+	
+	articles = Article.objects.filter(title__contains=search_text)
+
+	return render_to_response('ajax_search.html', {'articles': articles})
+

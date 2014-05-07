@@ -1,7 +1,9 @@
 
 <h1>{{ article.title }}</h1>
 <p>{{ article.body }}</p>
-
+{% if article.thumbnail %}
+<p><img src="{{MEDIA_URL}}{{article.thumbnail}}" width="200"/></p>
+{% endif %}
 <p>{{article.likes}} people liked this article</a></p>
 <p><a href="/t/like/{{article.id}}">Like</a></p>
 

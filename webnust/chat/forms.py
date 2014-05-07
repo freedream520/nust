@@ -5,7 +5,7 @@ class ArticleForm(forms.ModelForm):
 
 	class Meta:
 		model = Article
-		fields = ('title', 'body', 'pub_date')#, 'thumbnail'
+		fields = ('title', 'body', 'pub_date', 'thumbnail')
 
 # class CommentForm(forms.ModelForm):
     

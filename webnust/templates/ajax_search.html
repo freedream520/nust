@@ -1,0 +1,11 @@
+{% if articles.count > 0 %}
+
+{% for article in articles %}
+	<li><a href="/t/{{ article.id }}/">{{ article.title }}</a></li>
+{% endfor %}
+
+{% else %}
+
+<li>No results!</li>
+
+{% endif %}
