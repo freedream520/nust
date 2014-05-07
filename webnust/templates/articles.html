@@ -1,6 +1,21 @@
-<h2>Language is: {{language}}</h2>
+{% load static %}
+<head>
+	<script src="{% static "js/jquery-2.0.0.min.js" %}" ></script>
+	<script src="{% static "js/ajax.js" %}" ></script>
+</head>
 
+
+<h2>Language is: {{language}}</h2>
 <h2>Session Language is: {{session_language}}</h2>
+
+<h3>Search</h3>
+{% csrf_token %}
+<input type="text" id="search" name="search" />
+<ul id="search-results">
+	
+</ul> 
+<img src="{% get_static_prefix %}go.png " alt="My image"/>
+
 
 {% if articles.count > 0 %}
 

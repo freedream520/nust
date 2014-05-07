@@ -1,8 +1,11 @@
 from django.conf.urls import patterns, include, url
+from django.conf.urls.static import static
 from django import views
 from django.contrib import admin
-from webnust import settings
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -13,5 +16,10 @@ urlpatterns = patterns('',
 	url(r'^polls/', include('polls.urls', namespace="polls")),
 	url(r'^account/', include('account.urls', namespace="account")),
 	url(r'^t/', include('chat.urls', namespace="chat")),
-	url(r'^media/(?P<path>.*)$', views.static.serve, {'document_root': settings.MEDIA_ROOT}),
 )
+
+if settings.DEBUG:
+	urlpatterns += staticfiles_urlpatterns()
+
+#urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

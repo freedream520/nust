@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url
-
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from chat import views
 
 urlpatterns = patterns('',
@@ -14,3 +15,6 @@ urlpatterns = patterns('',
 	#url(r'^delete_comment/(?P<comment_id>\d+)/$', 'article.views.delete_comment'),
 	url(r'^search/$', views.search_titles),
 )
+
+if settings.DEBUG:
+	urlpatterns += staticfiles_urlpatterns()
