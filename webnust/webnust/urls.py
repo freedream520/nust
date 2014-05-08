@@ -4,6 +4,9 @@ from django import views
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from account.forms import ContactForm1, ContactForm2, ContactForm3
+from account.views import ContactWizard
+
 admin.autodiscover()
 
 
@@ -16,6 +19,7 @@ urlpatterns = patterns('',
 	url(r'^polls/', include('polls.urls', namespace="polls")),
 	url(r'^account/', include('account.urls', namespace="account")),
 	url(r'^t/', include('chat.urls', namespace="chat")),
+	url(r'^contact/$', ContactWizard.as_view([ContactForm1, ContactForm2, ContactForm3])),
 )
 
 if settings.DEBUG:

@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
 from account.forms import MyRegistrationForm
-from djnago.contrib.formtools.wizard.views import SessionWizardView
+from django.contrib.formtools.wizard.views import SessionWizardView
 from django.core.mail import send_mail
 
 
@@ -68,14 +68,15 @@ class ContactWizard(SessionWizardView):
 def process_form_data(form_list):
 	form_data = [form.cleaned_data for form in form_list]
 
-	logr.debug(form_data[0]['subject'])
-	logr.debug(form_data[0]['sender'])
-	logr.debug(form_data[0]['message'])
+	# logr.debug(form_data[0]['subject'])
+	# logr.debug(form_data[0]['sender'])
+	# logr.debug(form_data[0]['message'])
 
 	send_mail(form_data[0]['subject'],
 			form_data[2]['message'],
 			form_data[1]['sender'],
-			['x@qq.com'],
-			fail_silently=False)
+			['38321331@qq.com'],
+			fail_silently=False,
+			)
 
 	return form_data
