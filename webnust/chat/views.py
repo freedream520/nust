@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.conf import settings
 
 
-# Create your views here.
+
 def articles(request):
 	language = 'zh-CN'
 	session_language = 'zh-CN'
@@ -92,7 +92,7 @@ def add_comment(request, article_id):
 			c.article = a
 			c.save()
 
-			messages.success(request, "You Comment was added")
+			#messages.success(request, "You Comment was added")
 
 			return HttpResponseRedirect('/t/%s' % article_id)
 
@@ -114,7 +114,8 @@ def delete_comment(request, comment_id):
 
 	c.delete()
 
-	messages.add_message(request, settings.DELETE_MESSAGE, "Your comment was deleted")
+	#messages.add_message(request, settings.DELETE_MESSAGE, "Your comment was deleted")
 
 	return HttpResponseRedirect("/t/%s" % article_id)
 
+	

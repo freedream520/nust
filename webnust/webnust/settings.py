@@ -43,6 +43,8 @@ INSTALLED_APPS = (
 	'polls',
 	'account',
     'chat',
+    # 'south',
+    'django.contrib.formtools',
 )
 
 MIDDLEWARE_CLASSES = (
