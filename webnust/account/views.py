@@ -75,7 +75,7 @@ def process_form_data(form_list):
 	send_mail(form_data[0]['subject'],
 			form_data[2]['message'],
 			form_data[1]['sender'],
-			['38321331@qq.com'],
+			['billgates@gmail.lol'],
 			fail_silently=False,
 			)
 
