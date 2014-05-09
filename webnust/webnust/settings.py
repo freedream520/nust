@@ -43,6 +43,7 @@ INSTALLED_APPS = (
 	'polls',
 	'account',
     'chat',
+    'userprofile',
     # 'south',
     'django.contrib.formtools',
 )
@@ -114,3 +115,5 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
+AUTH_PROFILE_MODULE = 'userprofile.UserProfile'

@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^polls/', include('polls.urls', namespace="polls")),
 	url(r'^account/', include('account.urls', namespace="account")),
+	url(r'^account/', include('userprofile.urls')),
 	url(r'^t/', include('chat.urls', namespace="chat")),
 	url(r'^contact/$', ContactWizard.as_view([ContactForm1, ContactForm2, ContactForm3])),
 )
