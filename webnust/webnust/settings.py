@@ -40,12 +40,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'polls',
 	'account',
     'chat',
     'userprofile',
-    # 'south',
+    'south',
     'django.contrib.formtools',
+    'whoosh',
+    'haystack',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,7 +95,7 @@ USE_TZ = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -108,12 +109,22 @@ MEDIA_URL = '/media/'
 #STATIC_ROOT = None#os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
 
-STATIC_DIRS = os.path.join(BASE_DIR,'static')
+STATIC_DIRS = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+WHOOSH_INDEX = os.path.join(BASE_DIR, 'whoosh/')
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': WHOOSH_INDEX,
+    },
+}
 AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
+
+
+

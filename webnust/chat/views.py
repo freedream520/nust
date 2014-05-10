@@ -7,7 +7,7 @@ from django.core.context_processors import csrf
 from django.contrib import messages
 from django.utils import timezone
 from django.conf import settings
-
+from haystack.query import SearchQuerySet
 
 
 def articles(request):
@@ -77,9 +77,9 @@ def search_titles(request):
 	else:
 		search_text = ''
 		
-	if search_text:
-		articles = Article.objects.filter(title__contains=search_text)
-
+	articles = Article.objects.filter(title__contains=search_text)
+	# articles = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))         
+	
 	return render_to_response('ajax_search.html', {'articles': articles})
 
 def add_comment(request, article_id):

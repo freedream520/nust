@@ -16,7 +16,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-	url(r'^polls/', include('polls.urls', namespace="polls")),
 	url(r'^account/', include('account.urls', namespace="account")),
 	url(r'^account/', include('userprofile.urls')),
 	url(r'^t/', include('chat.urls', namespace="chat")),
