@@ -5,7 +5,7 @@ from django.core.context_processors import csrf
 from account.forms import MyRegistrationForm
 from django.contrib.formtools.wizard.views import SessionWizardView
 from django.core.mail import send_mail
-
+from notification.models import Notification
 
 def login(request):
 	c = {}
@@ -24,7 +24,8 @@ def auth_view(request):
 		return HttpResponseRedirect('/account/invalid')
 
 def loggedin(request):
-	return render_to_response('loggedin.html', {'full_name': request.user.username})
+	n = Notification.objects.filter(user=request.user, viewed=False)
+	return render_to_response('loggedin.html', {'full_name': request.user.username, 'notifications': n},)
 
 def invalid_login(request):
 	return render_to_response('invalid_login.html')

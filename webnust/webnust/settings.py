@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.formtools',
     'whoosh',
     'haystack',
+    'notification',
 )
 
 MIDDLEWARE_CLASSES = (
