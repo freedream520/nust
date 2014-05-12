@@ -32,26 +32,23 @@ def invalid_login(request):
 
 def logout(request):
 	return render_to_response('logout.html')
-#TODO logout.html
-
-
-
-
-
 
 def register_user(request):
+	errors = ''
 	if request.method == 'POST':
 		form = MyRegistrationForm(request.POST)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect('/account/register_success')
-		#TODO give tips when errors occur
+		else:
+			errors = 'yonghumingchongfuhuomimabuyizhi'
 
 	args = {}
 	args.update(csrf(request))
 
 	args['form'] = MyRegistrationForm()
-	print args
+	args['error'] = errors
+	# print args
 	return render_to_response('register.html', args)
 
 def register_success(request):
