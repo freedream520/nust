@@ -3,7 +3,7 @@
 </ul>
 
 
-<form action="/t/add_comment/{{article.id}}/" method="post">{% csrf_token %}
+<form action="/t/add_comment/{{article.id}}/" method="post" enctype="multipart/form-data">{% csrf_token %}
 <ul>
 {{form.as_ul}}
 </ul>

@@ -1,7 +1,8 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
 from forms import UserProfileForm
+from models import UserProfile
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -23,3 +24,7 @@ def user_profile(request):
 	args['form'] = form
 
 	return render_to_response('profile.html', args)
+
+def show_profile(request, user_id=1):   
+	return render(request, 'show_profile.html', 
+				{'profile': UserProfile.objects.get(id=user_id) })

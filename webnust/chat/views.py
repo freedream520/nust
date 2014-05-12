@@ -47,7 +47,9 @@ def create(request):
 	if request.POST:
 		form = ArticleForm(request.POST, request.FILES)
 		if form.is_valid():
-			a = form.save()
+			a = form.save(commit=False)
+			a.pub_date = timezone.now()
+			a.save()
 		
 			#messages.add_message(request, messages.SUCCESS, "You Article was added")
 			
@@ -85,8 +87,8 @@ def search_titles(request):
 def add_comment(request, article_id):
 	a = Article.objects.get(id=article_id)
 
-	if request.method == "POST":
-		f = CommentForm(request.POST)
+	if request.POST:
+		f = CommentForm(request.POST, request.FILES)
 		if f.is_valid():
 			c = f.save(commit=False)
 			c.pub_date = timezone.now()
@@ -119,4 +121,3 @@ def delete_comment(request, comment_id):
 
 	return HttpResponseRedirect("/t/%s" % article_id)
 
-	

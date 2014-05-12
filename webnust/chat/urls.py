@@ -17,6 +17,7 @@ urlpatterns = patterns('',
 	url(r'^add_comment/(?P<article_id>\d+)/$', views.add_comment),
 	url(r'^delete_comment/(?P<comment_id>\d+)/$', views.delete_comment),
 	url(r'^search/$', views.search_titles),
+	# url(r'^explore/$', views.search_group),
 	# url(r'^search/', include('haystack.urls')),
 	url(r'^api/', include(article_resource.urls)),
 )

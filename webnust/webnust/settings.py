@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'whoosh',
     'haystack',
     'notification',
+    'southtut',
 )
 
 MIDDLEWARE_CLASSES = (

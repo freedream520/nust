@@ -1,6 +1,7 @@
 
 <h1>{{ article.title }}</h1>
 <p>{{ article.body }}</p>
+<p>{{ article.pub_date }}</p>
 {% if article.thumbnail %}
 <p><img src="{{MEDIA_URL}}{{article.thumbnail}}" width="200"/></p>
 {% endif %}
@@ -8,7 +9,10 @@
 <p><a href="/t/like/{{article.id}}">Like</a></p>
 
 {% for c in article.comment_set.all reversed %}
-<p>{{c.pub_date|date:"Md G:i"}} {{c.username}}: {{c.body}} 
+<p>{{c.pub_date|date:"Md G:i"}} <a href="/account/profile/">{{c.username}}</a>: {{c.body}} 
+{% if c.thumbnail %}
+<p><img src="{{MEDIA_URL}}{{c.thumbnail}}" width="200"/></p>
+{% endif %}
 <a href="/t/delete_comment/{{c.id}}">Delete</a>
 </p>
 {% endfor %}

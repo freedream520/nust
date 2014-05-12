@@ -11,7 +11,7 @@ class Article(models.Model):
 	body = models.TextField()
 	pub_date = models.DateTimeField('date published')
 	likes = models.IntegerField(default=0)
-	thumbnail = models.FileField(upload_to=get_upload_file_name)
+	thumbnail = models.FileField(upload_to=get_upload_file_name, blank=True, null=True)
 	#approved = models.BooleanField(default=False)
 
     
@@ -23,3 +23,4 @@ class Comment(models.Model):
     body = models.TextField()
     pub_date = models.DateTimeField('date published')
     article = models.ForeignKey(Article)
+    thumbnail = models.FileField(upload_to=get_upload_file_name, blank=True, null=True)
