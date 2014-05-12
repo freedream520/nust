@@ -21,6 +21,7 @@ urlpatterns = patterns('',
 	url(r'^notification/', include('notification.urls')),
 	url(r'^t/', include('chat.urls', namespace="chat")),
 	url(r'^contact/$', ContactWizard.as_view([ContactForm1, ContactForm2, ContactForm3])),
+	url(r'^$', 'webnust.views.home'),
 )
 
 if settings.DEBUG:

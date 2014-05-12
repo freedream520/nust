@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile{% endblock %}
+{% block content %}
+
 <h2>Hi {{full_name}} you are now logged in!</h2>
 
 {% if notifications.count > 0 %}
@@ -10,3 +15,6 @@
 <p>Click <a href="/account/logout">here</a> to logout.</p>
 
 <p>Click <a href="/account/profile/">here</a> to edit your profile information</p>
+
+
+{% endblock %}

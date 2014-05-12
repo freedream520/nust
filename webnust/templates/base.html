@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Base Template{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/default.css" >
+	
+</head>
+
+<body>
+	<div id="page">
+
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul>
+            <li><a href="/t/all">Explore</a></li>
+            <li><a href="/contact/">CONTACT</a></li>
+            <li><a href="/account/login">LOG IN</a></li>
+            <li><a href="/account/register">SIGN UP</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+    
+	{% if messages %}
+	<ul class="messages">
+	    {% for message in messages %}
+	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</ul>
+	{% endif %}
+        
+        {% block content %}This is the content area{% endblock %}
+	
+	<div class="clearfix"></div>
+	<img src="{% get_static_prefix %}img/bot-logo.jpg " width="200"/>
+    </div>
+	
+	</div>
+		
+</body>
+</html>

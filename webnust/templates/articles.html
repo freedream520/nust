@@ -1,9 +1,10 @@
+{% extends "base.html" %}
 {% load static %}
-<head>
+
+{% block title %}EXPLORE{% endblock %}
+{% block content %}
 	<script src="{% static "js/jquery-2.0.0.min.js" %}" ></script>
 	<script src="{% static "js/ajax.js" %}" ></script>
-</head>
-
 
 <h2>Language is: {{language}}</h2>
 <h2>Session Language is: {{session_language}}</h2>
@@ -14,7 +15,7 @@
 <ul id="search-results">
 	
 </ul> 
-<img src="{% get_static_prefix %}go.png " alt="My image"/>
+<img src="{% get_static_prefix %}go.png " alt="My image" width="200"/>
 
 
 {% if articles.count > 0 %}
@@ -32,3 +33,4 @@
 <p>None to show!</p>
 
 {% endif %}
+{% endblock %}

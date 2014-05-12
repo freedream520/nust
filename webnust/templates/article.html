@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block title %}Group{% endblock %}
+{% block content %}
 
 <h1>{{ article.title }}</h1>
 <p>{{ article.creater }}</p>
@@ -21,3 +25,4 @@
 <p><a href="/t/add_comment/{{article.id}}">Add Comment</a></p>
 
 
+{% endblock %}
