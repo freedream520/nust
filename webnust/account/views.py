@@ -6,6 +6,7 @@ from account.forms import MyRegistrationForm
 from django.contrib.formtools.wizard.views import SessionWizardView
 from django.core.mail import send_mail
 from notification.models import Notification
+from django.contrib.auth import logout
 
 def login(request):
 	c = {}
@@ -30,7 +31,8 @@ def loggedin(request):
 def invalid_login(request):
 	return render_to_response('invalid_login.html')
 
-def logout(request):
+def logout_view(request):
+	logout(request)
 	return render_to_response('logout.html')
 
 def register_user(request):

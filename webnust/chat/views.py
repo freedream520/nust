@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.utils import timezone
 from django.conf import settings
 from haystack.query import SearchQuerySet
+from django.contrib.auth.decorators import login_required
 
 
 def articles(request):
@@ -42,13 +43,14 @@ def language(request, language='en-gb'):
 
 	return response
 
-
+@login_required(login_url='/account/login/')
 def create(request):
 	if request.POST:
 		form = ArticleForm(request.POST, request.FILES)
 		if form.is_valid():
 			a = form.save(commit=False)
 			a.pub_date = timezone.now()
+			a.creater = request.user.name
 			a.save()
 		
 			#messages.add_message(request, messages.SUCCESS, "You Article was added")
@@ -64,6 +66,7 @@ def create(request):
 
 	return render_to_response('create_article.html', args)
 
+@login_required(login_url='/account/login/')
 def like_article(request, article_id):
 	if article_id:
 		a = Article.objects.get(id=article_id)
@@ -84,6 +87,7 @@ def search_titles(request):
 	
 	return render_to_response('ajax_search.html', {'articles': articles})
 
+@login_required(login_url='/account/login/')
 def add_comment(request, article_id):
 	a = Article.objects.get(id=article_id)
 
@@ -93,6 +97,7 @@ def add_comment(request, article_id):
 			c = f.save(commit=False)
 			c.pub_date = timezone.now()
 			c.article = a
+			c.creater = request.user.name
 			c.save()
 
 			#messages.success(request, "You Comment was added")

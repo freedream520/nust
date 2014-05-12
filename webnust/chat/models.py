@@ -8,6 +8,7 @@ def get_upload_file_name(instance, filename):
 
 class Article(models.Model):
 	title = models.CharField(max_length=200)
+	creater = models.CharField(max_length=200)
 	body = models.TextField()
 	pub_date = models.DateTimeField('date published')
 	likes = models.IntegerField(default=0)
@@ -19,7 +20,7 @@ class Article(models.Model):
 		return self.title
 
 class Comment(models.Model):
-    username = models.CharField(max_length=200)
+    creater = models.CharField(max_length=200)
     body = models.TextField()
     pub_date = models.DateTimeField('date published')
     article = models.ForeignKey(Article)
