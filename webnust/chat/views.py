@@ -50,7 +50,7 @@ def create(request):
 		if form.is_valid():
 			a = form.save(commit=False)
 			a.pub_date = timezone.now()
-			a.creater = request.user.name
+			a.creater = request.user.username
 			a.save()
 		
 			#messages.add_message(request, messages.SUCCESS, "You Article was added")
@@ -97,7 +97,7 @@ def add_comment(request, article_id):
 			c = f.save(commit=False)
 			c.pub_date = timezone.now()
 			c.article = a
-			c.creater = request.user.name
+			c.creater = request.user.username
 			c.save()
 
 			#messages.success(request, "You Comment was added")
