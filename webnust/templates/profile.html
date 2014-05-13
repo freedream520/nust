@@ -2,14 +2,36 @@
 
 {% block title %}Edit Profile{% endblock %}
 {% block content %}
-
 <h2>Profile</h2>
   
- {% for field in form %}
- 	{{field.error}}
-
+{% for field in form %}
+	{{field.error}}
 {% endfor %}
-
+<form class="bs-example bs-example-form" role="form" action="/account/profile/" method="post">{% csrf_token %}
+	<div class="input-group">
+		<span class="input-group-addon">QQ</span>
+		<input type="text" class="form-control" placeholder="Tencent QQ" name="form.qq">
+	</div>
+	<br>
+	<div class="input-group">
+		<span class="input-group-addon">Email</span>
+		<input type="text" class="form-control" placeholder="Email Address" name="form.email">
+	</div>
+	<br>
+	<div class="input-group">
+		<span class="input-group-addon">Weibo</span>
+		<input type="text" class="form-control" placeholder="Sina Weibo" name="form.weibo">
+	</div>
+	<br>
+	<div class="col-lg-6">
+		<div class="input-group">
+			<span class="input-group-addon">Gentle</span>
+			<input type="text" class="form-control" input type="radio" name="form.gentle">
+		</div><!-- /input-group -->
+	</div><!-- /.col-lg-6 -->
+	<br>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+</form>
 <form action="/account/profile/" method="post">{% csrf_token %}
 {{form.as_ul}}
 

@@ -1,44 +1,54 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>{% block title %}Base Template{% endblock %}</title>
-
-    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/default.css" >
-	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/bootstrap.min.css" >
+    {% block css %}
+    {% endblock %}
 </head>
-
 <body>
-	<div id="page">
+	<div id="navbar">
+		{% block navbar %}
+		<nav class="nav navbar-default" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Home</a>
+			</div>
 
-    <div id="sidebar">
-        {% block sidebar %}
-        <ul>
-            <li><a href="/t/all">Explore</a></li>
-            <li><a href="/contact/">CONTACT</a></li>
-            <li><a href="/account/login">LOG IN</a></li>
-            <li><a href="/account/register">SIGN UP</a></li>
-        </ul>
-        {% endblock %}
-    </div>
-
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="/t/all">Explore</a></li>
+					<li><a href="/contact">Contact</a></li>
+					<li><a href="/account/login">Sign in</a></li>
+					<li><a href="/account/register"<button type="button" class="btn btn-default">Sign up</button></a></li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</nav>
+		{% endblock %}
+	</div>
     <div id="content">
-    
 	{% if messages %}
 	<ul class="messages">
-	    {% for message in messages %}
-	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-	    {% endfor %}
+		{% for message in messages %}
+		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		{% endfor %}
 	</ul>
 	{% endif %}
-        
-        {% block content %}This is the content area{% endblock %}
-	
-	<div class="clearfix"></div>
-	<img src="{% get_static_prefix %}img/bot-logo.jpg " width="200"/>
-    </div>
-	
+	{% block content %}This is the content area{% endblock %}
 	</div>
-		
+	<div id="scripts">
+		<script src="{% get_static_prefix %}js/jquery-2.1.1.min.js" ></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="{% get_static_prefix %}js/bootstrap.min.js" ></script>
+	</div>	
 </body>
 </html>

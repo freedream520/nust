@@ -43,7 +43,7 @@ def register_user(request):
 			form.save()
 			return HttpResponseRedirect('/account/register_success')
 		else:
-			errors = 'yonghumingchongfuhuomimabuyizhi'
+			errors = 'yonghumingchongfu'
 
 	args = {}
 	args.update(csrf(request))

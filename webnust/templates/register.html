@@ -1,19 +1,20 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Sign up{% endblock %}
 {% block content %}
-
-<h2>Register</h2>
-
-
-<form action="/account/register/" method="post">{% csrf_token %}
-{{form}}
-
-<input type="submit" value="Register" />
-
-</form>
+	<link href="{% get_static_prefix %}css/signup.css" rel="stylesheet">
+	<div class="container">
+		<form action="/account/register/" method="post" class="form-signin" role="form">{% csrf_token %}
+			<h2 class="form-signin-heading">Please sign up</h2>
+			<input type="text" class="form-control" maxlength="30" placeholder="Username" id="id_username" name="username">
+			<input type="password" class="form-control" placeholder="Password" id="id_password1" name="password1">
+			<input type="password" class="form-control" placeholder="Repeat password" id="id_password2" name="password2">
+			<input type="email" class="form-control" placeholder="Email" id="id_email" name="email">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+		</form>
+	</div> <!-- /container -->
 {% if error %}
-<p>{{ error }}</p>
+<div class="alert alert-danger">{{ error }}</div>
 {% endif %}
-
 {% endblock %}

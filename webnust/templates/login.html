@@ -1,21 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}unknown{% endblock %}
+{% block title %}Sign in{% endblock %}
 {% block content %}
-
+	<link href="{% get_static_prefix %}css/signin.css" rel="stylesheet">
+	<div class="container">
+		<form action="/account/auth" method="post" class="form-signin" role="form">{% csrf_token %}
+			<h2 class="form-signin-heading">Please sign in</h2>
+			<input type="text" class="form-control" placeholder="Username" value="" name="username" required autofocus>
+			<input type="password" class="form-control" placeholder="Password" value="" name="password" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		</form>
+    </div> <!-- /container -->
 {% if form.errors %}
     <p class="error">Sorry, that's not a valid username or password</p>
 {% endif %}
 
-<form action="/account/auth" method="post">{% csrf_token %}
-    <label for="username">User name:</label>
-    <input type="text" name="username" value="" id="username">
-    <label for="password">Password:</label>
-    <input type="password" name="password" value="" id="password">
-
-    <input type="submit" value="login" />
-
-</form>
 
 
 {% endblock %}
