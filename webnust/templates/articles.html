@@ -6,8 +6,8 @@
 	<script src="{% static "js/jquery-2.1.1.min.js" %}" ></script>
 	<script src="{% static "js/ajax.js" %}" ></script>
 
-<h2>Language is: {{language}}</h2>
-<h2>Session Language is: {{session_language}}</h2>
+<h4>Language is: {{language}}</h4>
+<h4>Session Language is: {{session_language}}</h4>
 
 <h3>Search</h3>
 {% csrf_token %}
@@ -15,8 +15,6 @@
 <ul id="search-results">
 	
 </ul> 
-<img src="{% get_static_prefix %}go.png " alt="My image" width="200"/>
-
 
 {% if articles.count > 0 %}
 
