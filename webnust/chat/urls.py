@@ -17,7 +17,6 @@ urlpatterns = patterns('',
 	url(r'^api/', include(article_resource.urls)),
 	# url(r'^search/', include('haystack.urls')),
 	# url(r'^language/(?P<language>[a-z\-]+)/$', 'article.views.language'),
-
 )
 
 if settings.DEBUG:

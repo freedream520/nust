@@ -5,10 +5,8 @@
 {% block content %}
 	<script src="{% static "js/jquery-2.1.1.min.js" %}" ></script>
 	<script src="{% static "js/ajax.js" %}" ></script>
-
 <h4>Language is: {{language}}</h4>
 <h4>Session Language is: {{session_language}}</h4>
-
 <h3>Search</h3>
 {% csrf_token %}
 <input type="text" id="search" name="search" />
@@ -17,18 +15,15 @@
 </ul> 
 
 {% if articles.count > 0 %}
-
-{% for article in articles %}
+	{% for article in articles %}
 	<div>
 	<h2><a href="/t/{{ article.id }}/">{{ article.title }}</a></h2>
 	<p>{{ article.body|lower|truncatewords:"10" }}</p>
 	<p>{{article.likes}} people liked this article</a></p>
 	</div>
-{% endfor %}
-
-{% else %}
-
-<p>None to show!</p>
-
+	{% endfor %}
+	{% else %}
+		<p>None to show!</p>
 {% endif %}
+
 {% endblock %}

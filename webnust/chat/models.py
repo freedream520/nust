@@ -13,9 +13,7 @@ class Article(models.Model):
 	pub_date = models.DateTimeField('date published')
 	likes = models.IntegerField(default=0)
 	thumbnail = models.FileField(upload_to=get_upload_file_name, blank=True, null=True)
-	#approved = models.BooleanField(default=False)
 
-    
 	def __unicode__(self):
 		return self.title
 

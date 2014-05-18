@@ -52,8 +52,6 @@ def create(request):
 			a.pub_date = timezone.now()
 			a.creater = request.user.username
 			a.save()
-		
-			#messages.add_message(request, messages.SUCCESS, "You Article was added")
 			
 			return HttpResponseRedirect('/t/all')
 	else:
@@ -61,7 +59,6 @@ def create(request):
 
 	args = {}
 	args.update(csrf(request))
-
 	args['form'] = form
 
 	return render_to_response('create_article.html', args)

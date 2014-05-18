@@ -25,5 +25,4 @@ class UserProfile(models.Model):
 	major = models.CharField(max_length=50, blank=True, null=True)
 	qq = models.CharField(max_length=12, blank=True, null=True)
 
-
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
