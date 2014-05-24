@@ -2,7 +2,7 @@
 
 {% block title %}My Profile{% endblock %}
 {% block content %}
-
+<div style="margin-left: 20px">
 <h2>Hi {{full_name}} you are now logged in!</h2>
 
 {% if notifications.count > 0 %}
@@ -16,5 +16,5 @@
 
 <p>Click <a href="/account/profile/">here</a> to edit your profile information</p>
 
-
+</div>
 {% endblock %}

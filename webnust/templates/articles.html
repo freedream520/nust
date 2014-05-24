@@ -2,28 +2,86 @@
 {% load static %}
 
 {% block title %}EXPLORE{% endblock %}
+{% block css %}
+	<link href="{% get_static_prefix %}css/styles.css" rel="stylesheet">
+{% endblock %}
 {% block content %}
-	<script src="{% static "js/jquery-2.1.1.min.js" %}" ></script>
-	<script src="{% static "js/ajax.js" %}" ></script>
-<h4>Language is: {{language}}</h4>
-<h4>Session Language is: {{session_language}}</h4>
-<h3>Search</h3>
-{% csrf_token %}
-<input type="text" id="search" name="search" />
+	<script src="{% get_static_prefix %}js/jquery-2.1.1.min.js" ></script>
+	<script src="{% get_static_prefix %}js/ajax.js" ></script>
+	<script src="{% get_static_prefix %}js/scripts.js"></script>
+<div>
+<style>
+.trans
+{
+width:100px;
+transition:width 1s;
+-moz-transition:width 1s; /* Firefox 4 */
+-webkit-transition:width 1s; /* Safari and Chrome */
+-o-transition:width 1s; /* Opera */
+}
+
+.trans:hover
+{
+width:300px;
+}
+</style>
+<div style="position:relative; left: 100px">
+<h3>Search {% csrf_token %}<input class="trans" type="text" id="search" name="search" /></h3>
 <ul id="search-results">
 	
-</ul> 
+</ul>
+</div> 
+</div>
+<div class="container">
+  <div class="row">
+    
+    <div class="col-md-12"> 
+      
+      <div class="panel">
+        <div class="panel-body">
+          
+          
+          
+          <!--/stories-->
+        	{% if articles.count > 0 %}
+				{% for article in articles %}
+				<div class="row">
+				<br>
+				<div class="col-md-2 col-sm-3 text-center">
+					<a><img alt="{{ article.id }}" src="http://127.0.0.1:8000/media/{{ article.thumbnail }}" style="width:100px;height:100px" class="img-circle"></a>
+				</div>
+				<div class="col-md-10 col-sm-9">
+					<h3><a href="/t/{{ article.id }}/">{{ article.title }}</a></h3>
+					<div class="row">
+                		<div class="col-xs-9">
+                		<h4><span class="label label-default">{{article.likes}} people liked this article</span></h4>
+                		<h4>
+                		<p>{{ article.body|lower|truncatewords:"10" }}</p>
+                		<hr>
+                		<small style="font-family:courier,'new courier';" class="text-muted"><a href="/t/{{ article.id }}/" class="text-muted">Read More</a></small>
+                		</h4>
+                		</div>
+                		<div class="col-xs-3"></div>
+              		</div>
+              		<br><br>
+            	</div>
+          		</div>
+				{% endfor %}
+			{% else %}
+				<p>None to show!</p>
+			{% endif %}
 
-{% if articles.count > 0 %}
-	{% for article in articles %}
-	<div>
-	<h2><a href="/t/{{ article.id }}/">{{ article.title }}</a></h2>
-	<p>{{ article.body|lower|truncatewords:"10" }}</p>
-	<p>{{article.likes}} people liked this article</a></p>
-	</div>
-	{% endfor %}
-	{% else %}
-		<p>None to show!</p>
-{% endif %}
+          <a href="/t/create/" class="btn btn-primary">Create <i class="glyphicon glyphicon-chevron"></i></a>
+          <a href="/t/all/" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
+        </div>
+      </div>
+                                                                                       
+	                                                
+                                                      
+   	</div><!--/col-12-->
+  </div>
+</div>
+<h5>Language is: {{language}}</h5>
+<h5>Session Language is: {{session_language}}</h5>
 
 {% endblock %}

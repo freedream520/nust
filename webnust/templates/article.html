@@ -2,27 +2,30 @@
 
 {% block title %}Group{% endblock %}
 {% block content %}
-
+<div style="margin-left: 5%; margin-right: 5%; margin-top: 5%;">
+<div style="background-color: white;box-shadow: 0px 1px 3px 3px #888888; border-radius:25px; padding: 10px;">
 <h1>{{ article.title }}</h1>
-<p>{{ article.creater }}</p>
-<p>{{ article.body }}</p>
-<p>{{ article.pub_date }}</p>
+<p style="font-size: 14px;">  发布者：{{ article.creater }} 时间：{{ article.pub_date }}</p>
+<p style="font-size: 20px;">{{ article.body }}</p>
 {% if article.thumbnail %}
-<p><img src="{{MEDIA_URL}}{{article.thumbnail}}" width="200"/></p>
+<p><a href="{{MEDIA_URL}}{{article.thumbnail}}"><img src="{{MEDIA_URL}}{{article.thumbnail}}" width="100"/></a></p>
 {% endif %}
-<p>{{article.likes}} people liked this article</a></p>
-<p><a href="/t/like/{{article.id}}">Like</a></p>
-
+<p>{{article.likes}} people liked this article <a href="/t/like/{{article.id}}">Like</a></p>
+</div>
+<br>
 {% for c in article.comment_set.all reversed %}
-<p>{{c.pub_date|date:"Md G:i"}} <a href="/account/profile/">{{c.creater}}</a>: {{c.body}} 
+<div style="background-color: white;box-shadow: 0px 1px 3px 3px #888888; border-radius:25px; padding: 10px;">
+<p style="font-size: 14px;">{{c.pub_date|date:"Md G:i"}} <a href="/account/profile/">{{c.creater}}</a>:</p>
+<p style="font-size: 20px;"> {{c.body}} </p>
 {% if c.thumbnail %}
-<p><img src="{{MEDIA_URL}}{{c.thumbnail}}" width="200"/></p>
+<p><a href="{{MEDIA_URL}}{{c.thumbnail}}"><img src="{{MEDIA_URL}}{{c.thumbnail}}" width="100"/></a></p>
 {% endif %}
 <a href="/t/delete_comment/{{c.id}}">Delete</a>
-</p>
+</div>
+<br>
 {% endfor %}
 
 <p><a href="/t/add_comment/{{article.id}}">Add Comment</a></p>
 
-
+</div>
 {% endblock %}
