@@ -1,9 +1,0 @@
-*.pyc
-.idea/
-pypo/settings_local.py
-pypo/whoosh_index/*
-whoosh_index_test
-doc/build
-doc/_build
-.coverage
-bower_components/*
